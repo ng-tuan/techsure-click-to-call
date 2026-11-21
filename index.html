@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Claims &amp; Returns | TechSure Support</title>
+  <meta name="description" content="Start, check, update or cancel a TechSure claim or return. Call Sam, our voice assistant, from your browser.">
+  <style>
+    :root {
+      --navy: #0f2a4a; --blue: #1f6feb; --blue-soft: #e8f0fe; --ink: #18212f; --muted: #5d6878;
+      --line: #e3e8f0; --bg: #f6f8fb; --card: #ffffff; --green: #127a4a; --amber-bg: #fff8e6; --amber-line: #f5d48a;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif; color: var(--ink); background: var(--bg); line-height: 1.55; }
+    a { color: var(--blue); }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 0 22px; }
+
+    /* Top bar */
+    .topbar { background: var(--navy); color: #cfd8e6; font-size: 13px; }
+    .topbar .wrap { display: flex; justify-content: space-between; gap: 12px; padding-top: 7px; padding-bottom: 7px; flex-wrap: wrap; }
+    header.site { background: #fff; border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 5; }
+    header.site .wrap { display: flex; align-items: center; gap: 28px; height: 64px; }
+    .logo { display: flex; align-items: center; gap: 9px; font-weight: 800; font-size: 21px; color: var(--navy); text-decoration: none; letter-spacing: .2px; }
+    .logo svg { width: 30px; height: 30px; }
+    nav.main { display: flex; gap: 22px; font-size: 15px; }
+    nav.main a { color: var(--ink); text-decoration: none; padding: 21px 0; border-bottom: 3px solid transparent; }
+    nav.main a.active { border-bottom-color: var(--blue); color: var(--blue); font-weight: 600; }
+    .spacer { flex: 1; }
+    .acct { font-size: 14px; color: var(--muted); }
+
+    .crumbs { font-size: 13px; color: var(--muted); padding: 14px 0 0; }
+    .crumbs a { color: var(--muted); text-decoration: none; }
+
+    /* Hero */
+    .hero { display: grid; grid-template-columns: 1.35fr 1fr; gap: 34px; align-items: center; padding: 26px 0 38px; }
+    .hero h1 { font-size: 38px; line-height: 1.15; margin: 0 0 12px; color: var(--navy); }
+    .hero p.lead { font-size: 18px; color: var(--muted); margin: 0 0 20px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip { background: var(--blue-soft); color: #134a9e; border-radius: 999px; padding: 5px 12px; font-size: 13px; font-weight: 600; }
+    .callcard { background: var(--navy); color: #fff; border-radius: 16px; padding: 24px; box-shadow: 0 12px 30px rgba(15, 42, 74, .18); }
+    .callcard h2 { margin: 0 0 6px; font-size: 21px; }
+    .callcard p { margin: 0 0 14px; color: #cfd8e6; font-size: 15px; }
+    .callcard ul { margin: 0 0 16px; padding-left: 18px; color: #e6ecf5; font-size: 14px; }
+    .callcard .pointer { display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,.1); border-radius: 10px; padding: 11px 13px; font-size: 14px; }
+    .callcard .pointer b { color: #fff; }
+    .dot { width: 10px; height: 10px; border-radius: 50%; background: #3fd17a; box-shadow: 0 0 0 4px rgba(63, 209, 122, .25); flex: none; }
+
+    section.block { padding: 34px 0; border-top: 1px solid var(--line); }
+    section.block h2 { font-size: 25px; margin: 0 0 6px; color: var(--navy); }
+    section.block p.sub { margin: 0 0 22px; color: var(--muted); }
+
+    /* Steps */
+    .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; counter-reset: step; }
+    .step { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 18px; }
+    .step::before { counter-increment: step; content: counter(step); display: inline-grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--blue); color: #fff; font-weight: 700; margin-bottom: 10px; }
+    .step h3 { margin: 0 0 6px; font-size: 16px; }
+    .step p { margin: 0; font-size: 14px; color: var(--muted); }
+
+    /* Policy cards */
+    .cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 18px; }
+    .card .big { font-size: 28px; font-weight: 800; color: var(--navy); }
+    .card h3 { margin: 2px 0 6px; font-size: 15px; }
+    .card p { margin: 0; font-size: 14px; color: var(--muted); }
+
+    /* FAQ */
+    .faq { display: grid; gap: 10px; max-width: 820px; }
+    details { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 0 18px; }
+    summary { cursor: pointer; padding: 15px 0; font-weight: 600; list-style: none; }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: "+"; float: right; color: var(--blue); font-size: 20px; line-height: 1; }
+    details[open] summary::after { content: "–"; }
+    details p { margin: 0 0 15px; color: var(--muted); }
+
+    /* Evaluator guide */
+    .guide { background: var(--amber-bg); border: 1px solid var(--amber-line); border-radius: 14px; padding: 22px 24px; }
+    .guide h2 { margin-top: 0; }
+    .guide .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; }
+    .guide h3 { font-size: 16px; margin: 0 0 8px; }
+    .guide table { border-collapse: collapse; width: 100%; font-size: 14px; background: #fff; border-radius: 8px; overflow: hidden; }
+    .guide th, .guide td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+    .guide th { color: var(--muted); font-weight: 500; width: 42%; }
+    .guide ul, .guide ol { margin: 0; padding-left: 20px; font-size: 14px; }
+    .guide li { margin: 4px 0; }
+    code { font-family: Consolas, Menlo, monospace; background: #eef2f8; padding: 1px 6px; border-radius: 4px; font-size: 13px; }
+    .btn { display: inline-block; background: var(--blue); color: #fff; text-decoration: none; padding: 9px 15px; border-radius: 8px; font-weight: 600; font-size: 14px; }
+
+    footer { background: var(--navy); color: #aebbd0; font-size: 13px; margin-top: 30px; }
+    footer .wrap { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 24px; padding-top: 30px; padding-bottom: 30px; }
+    footer h4 { color: #fff; margin: 0 0 8px; font-size: 14px; }
+    footer a { color: #aebbd0; text-decoration: none; display: block; margin: 3px 0; }
+    footer .legal { grid-column: 1 / -1; border-top: 1px solid rgba(255,255,255,.12); padding-top: 14px; }
+
+    @media (max-width: 860px) {
+      .hero, .guide .cols { grid-template-columns: 1fr; }
+      .steps, .cards { grid-template-columns: 1fr 1fr; }
+      nav.main, .acct { display: none; }
+      footer .wrap { grid-template-columns: 1fr 1fr; }
+      .hero h1 { font-size: 30px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="wrap">
+      <span>Free return shipping on faulty products · 1-year warranty on every device</span>
+      <span>Support hours: Mon–Fri 8 am–8 pm · Sat 9 am–5 pm</span>
+    </div>
+  </div>
+
+  <header class="site">
+    <div class="wrap">
+      <a class="logo" href="#" aria-label="TechSure home">
+        <svg viewBox="0 0 32 32" aria-hidden="true"><rect x="2" y="2" width="28" height="28" rx="8" fill="#1f6feb"/><path d="M9 11h14M16 11v12" stroke="#fff" stroke-width="3.2" stroke-linecap="round"/><circle cx="23" cy="22" r="3" fill="#3fd17a"/></svg>
+        TechSure
+      </a>
+      <nav class="main" aria-label="Main">
+        <a href="#">Shop</a>
+        <a href="#">Orders</a>
+        <a href="#" class="active">Claims &amp; Returns</a>
+        <a href="#faq">Help Centre</a>
+      </nav>
+      <span class="spacer"></span>
+      <span class="acct">Sign in</span>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="crumbs"><a href="#">Support</a> › Claims &amp; Returns</div>
+
+    <div class="hero">
+      <div>
+        <h1>Claims &amp; Returns</h1>
+        <p class="lead">Something wrong with your TechSure device? Start a claim, check its status, add information or cancel it in a few minutes. No hold music.</p>
+        <div class="chips">
+          <span class="chip">30-day returns</span>
+          <span class="chip">1-year warranty</span>
+          <span class="chip">Free return label</span>
+          <span class="chip">English &amp; Tiếng Việt</span>
+        </div>
+      </div>
+      <aside class="callcard" aria-label="Call our voice assistant">
+        <h2>Talk to Sam, our claims assistant</h2>
+        <p>Call from your browser. Sam can help you right away, day or night.</p>
+        <ul>
+          <li>Start a new claim or return</li>
+          <li>Check, update or cancel a claim</li>
+          <li>Ask about warranty, refunds and shipping</li>
+          <li>Ask for a specialist at any time</li>
+        </ul>
+        <div class="pointer"><span class="dot"></span><span>Use the <b>call button</b> at the bottom-right of this page and allow your microphone.</span></div>
+      </aside>
+    </div>
+
+    <section class="block">
+      <h2>How a claim works</h2>
+      <p class="sub">For your security, we verify your identity with your phone number, order number and postal code before sharing any claim details.</p>
+      <div class="steps">
+        <div class="step"><h3>Verify</h3><p>Tell Sam the phone number, order number and postal code on your order.</p></div>
+        <div class="step"><h3>Describe</h3><p>Give the product ID (for example P-510) and a short description of the problem.</p></div>
+        <div class="step"><h3>Ship it back</h3><p>We email a prepaid return label within 1 business day. Write your claim number on the box.</p></div>
+        <div class="step"><h3>Get it sorted</h3><p>Most claims are reviewed in 3–5 business days. Replacements or refunds follow within 7 business days of arrival.</p></div>
+      </div>
+    </section>
+
+    <section class="block">
+      <h2>Policy at a glance</h2>
+      <p class="sub">The essentials of our returns and warranty policy.</p>
+      <div class="cards">
+        <div class="card"><div class="big">30 days</div><h3>Return window</h3><p>Return unused products in original packaging within 30 days of delivery.</p></div>
+        <div class="card"><div class="big">1 year</div><h3>Limited warranty</h3><p>Covers manufacturing defects. Batteries are covered for 6 months.</p></div>
+        <div class="card"><div class="big">$0</div><h3>Return shipping</h3><p>Free prepaid label for faulty products and changes of mind within 30 days.</p></div>
+        <div class="card"><div class="big">10%</div><h3>Restocking fee</h3><p>Only for opened, working products returned because you changed your mind.</p></div>
+      </div>
+    </section>
+
+    <section class="block" id="faq">
+      <h2>Frequently asked questions</h2>
+      <p class="sub">You can also ask Sam any of these on a call. No verification is needed for general questions.</p>
+      <div class="faq">
+        <details><summary>How do I start a returns claim?</summary><p>Call Sam and say "new claim". After a quick identity check, Sam asks for the product ID and a short description of the problem, then gives you a claim number that starts with C.</p></details>
+        <details><summary>Can I cancel my return?</summary><p>Yes, at any time before the claim is refunded, completed or closed. A claim that was rejected or already completed can no longer be cancelled.</p></details>
+        <details><summary>What documents do I need for a return?</summary><p>Your claim number, order number, proof of purchase, and the product with all its accessories and cables. Please remove any passwords or personal data from the device first.</p></details>
+        <details><summary>How long does processing take?</summary><p>Most claims are reviewed within 3 to 5 business days. Once we receive the product, a replacement or refund usually takes up to 7 business days.</p></details>
+        <details><summary>I gave the wrong information. How do I fix it?</summary><p>Say "update claim" to add a clarification, a tracking number or new contact details. If the product ID is wrong, cancel the claim and start a new one.</p></details>
+        <details><summary>Is accidental or liquid damage covered?</summary><p>No. The warranty covers manufacturing defects and hardware failures under normal use, not drops, cracked screens or liquid damage.</p></details>
+      </div>
+    </section>
+
+    <section class="block">
+      <div class="guide" aria-label="Guide for capstone evaluators">
+        <h2>For evaluators: test guide</h2>
+        <p class="sub">TechSure is a fictional brand built for the Cognigy.AI Capstone (Use Case 3: Claims and RMA with Identity Verification).</p>
+        <div class="cols">
+          <div>
+            <h3>1. Test identity (ID&amp;V)</h3>
+            <table>
+              <tr><th>Registered phone number</th><td><code>+1 415 555 0102</code><br>A browser call has no caller ID, so Sam asks for it.</td></tr>
+              <tr><th>Order number</th><td><code>ORD-100002</code></td></tr>
+              <tr><th>Postal code</th><td><code>10001</code></td></tr>
+              <tr><th>Existing claim</th><td><code>C-408708</code></td></tr>
+            </table>
+            <p style="font-size:14px;margin:10px 0 0">The first question chooses the language: say <b>"English"</b> or <b>"Tiếng Việt"</b>. Three failed verification attempts lock claim actions and route the caller to a specialist (placeholder transfer).</p>
+          </div>
+          <div>
+            <h3>2. Things to try</h3>
+            <ul>
+              <li>Ask a general question before verifying: "Can I cancel my return?", "Is the return label free?"</li>
+              <li>"What is the status of my claim?"</li>
+              <li>"I want to start a new claim" (product ID <code>P-510</code>)</li>
+              <li>"Update claim C-408708", then use the secure form below or just say the update</li>
+              <li>"Cancel claim C-408708" (eligibility is checked first)</li>
+              <li>"I want to talk to a person"</li>
+            </ul>
+            <h3 style="margin-top:16px">3. Secure update form (xApp)</h3>
+            <ol>
+              <li>During "update claim", Sam reads out a 6-character PIN.</li>
+              <li>Open the PIN page, then type the PIN one character at a time (lowercase, English keyboard).</li>
+              <li>The PIN is valid for 5 minutes. Say "new PIN" to get another one.</li>
+            </ol>
+            <p style="margin:12px 0 0"><a class="btn" href="https://cognigy-static-jp1.nicecxone.com" target="_blank" rel="noopener">Open the PIN page</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div>
+        <h4>TechSure Support</h4>
+        Help for your headphones, speakers, laptops, tablets and smart watches.
+      </div>
+      <div><h4>Support</h4><a href="#">Claims &amp; Returns</a><a href="#faq">Help Centre</a><a href="#">Warranty</a></div>
+      <div><h4>Orders</h4><a href="#">Track an order</a><a href="#">Shipping</a><a href="#">Refunds</a></div>
+      <div><h4>Company</h4><a href="#">About</a><a href="#">Privacy</a><a href="#">Terms</a></div>
+      <div class="legal">TechSure is a fictional company created for the Cognigy.AI Capstone project. No real orders, payments or personal data are processed on this page.</div>
+    </div>
+  </footer>
+
+  <!-- Cognigy Voice Gateway Click-to-Call widget (endpoint: Voice-Claims-RMA) -->
+  <script src="https://github.com/Cognigy/click-to-call-widget/releases/latest/download/webRTCWidget.js"></script>
+  <script>
+    addEventListener("load", function () {
+      if (window.initWebRTCWidget) {
+        window.initWebRTCWidget("https://cognigy-endpoint-jp1.nicecxone.com/f9763f9d553fd7a48ed7f73caa5afafe5bcba722502310129326408d297b620b");
+      }
+    });
+  </script>
+</body>
+</html>
