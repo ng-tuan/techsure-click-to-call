@@ -46,7 +46,7 @@
     .callcard .pointer b { color: #fff; }
     .dot { width: 10px; height: 10px; border-radius: 50%; background: #3fd17a; box-shadow: 0 0 0 4px rgba(63, 209, 122, .25); flex: none; }
 
-    section.block { padding: 34px 0; border-top: 1px solid var(--line); }
+    section.block { padding: 34px 0; border-top: 1px solid var(--line); scroll-margin-top: 72px; }
     section.block h2 { font-size: 25px; margin: 0 0 6px; color: var(--navy); }
     section.block p.sub { margin: 0 0 22px; color: var(--muted); }
 
@@ -89,7 +89,8 @@
     footer { background: var(--navy); color: #aebbd0; font-size: 13px; margin-top: 30px; }
     footer .wrap { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 24px; padding-top: 30px; padding-bottom: 30px; }
     footer h4 { color: #fff; margin: 0 0 8px; font-size: 14px; }
-    footer a { color: #aebbd0; text-decoration: none; display: block; margin: 3px 0; }
+    footer a, footer span { color: #aebbd0; text-decoration: none; display: block; margin: 3px 0; }
+    footer a:hover { color: #fff; }
     footer .legal { grid-column: 1 / -1; border-top: 1px solid rgba(255,255,255,.12); padding-top: 14px; }
 
     @media (max-width: 860px) {
@@ -101,7 +102,7 @@
     }
   </style>
 </head>
-<body>
+<body id="top">
   <div class="topbar">
     <div class="wrap">
       <span>Free return shipping on faulty products · 1-year warranty on every device</span>
@@ -111,23 +112,23 @@
 
   <header class="site">
     <div class="wrap">
-      <a class="logo" href="#" aria-label="TechSure home">
+      <a class="logo" href="#top" aria-label="Back to top">
         <svg viewBox="0 0 32 32" aria-hidden="true"><rect x="2" y="2" width="28" height="28" rx="8" fill="#1f6feb"/><path d="M9 11h14M16 11v12" stroke="#fff" stroke-width="3.2" stroke-linecap="round"/><circle cx="23" cy="22" r="3" fill="#3fd17a"/></svg>
         TechSure
       </a>
       <nav class="main" aria-label="Main">
-        <a href="#">Shop</a>
-        <a href="#">Orders</a>
-        <a href="#" class="active">Claims &amp; Returns</a>
-        <a href="#faq">Help Centre</a>
+        <a href="#how">How it works</a>
+        <a href="#policy">Policy</a>
+        <a href="#faq">FAQ</a>
+        <a href="#guide">Test guide</a>
       </nav>
       <span class="spacer"></span>
-      <span class="acct">Sign in</span>
+      <span class="acct">Claims &amp; Returns</span>
     </div>
   </header>
 
   <main class="wrap">
-    <div class="crumbs"><a href="#">Support</a> › Claims &amp; Returns</div>
+    <div class="crumbs">Support › Claims &amp; Returns</div>
 
     <div class="hero">
       <div>
@@ -149,11 +150,11 @@
           <li>Ask about warranty, refunds and shipping</li>
           <li>Ask for a specialist at any time</li>
         </ul>
-        <div class="pointer"><span class="dot"></span><span>Use the <b>call button</b> at the bottom-right of this page and allow your microphone.</span></div>
+        <div class="pointer"><span class="dot"></span><span>Use the <b>call button</b> at the bottom-right of this page and allow your microphone. The last lines of the conversation appear as live captions above the button.</span></div>
       </aside>
     </div>
 
-    <section class="block">
+    <section class="block" id="how">
       <h2>How a claim works</h2>
       <p class="sub">For your security, we verify your identity with your phone number, order number and postal code before sharing any claim details.</p>
       <div class="steps">
@@ -164,7 +165,7 @@
       </div>
     </section>
 
-    <section class="block">
+    <section class="block" id="policy">
       <h2>Policy at a glance</h2>
       <p class="sub">The essentials of our returns and warranty policy.</p>
       <div class="cards">
@@ -188,7 +189,7 @@
       </div>
     </section>
 
-    <section class="block">
+    <section class="block" id="guide">
       <div class="guide" aria-label="Guide for capstone evaluators">
         <h2>For evaluators: test guide</h2>
         <p class="sub">TechSure is a fictional brand built for the Cognigy.AI Capstone (Use Case 3: Claims and RMA with Identity Verification).</p>
@@ -202,6 +203,7 @@
               <tr><th>Existing claim</th><td><code>C-408708</code></td></tr>
             </table>
             <p style="font-size:14px;margin:10px 0 0">The first question chooses the language: say <b>"English"</b> or <b>"Tiếng Việt"</b>. Three failed verification attempts lock claim actions and route the caller to a specialist (placeholder transfer).</p>
+            <p style="font-size:14px;margin:8px 0 0">The call widget shows only the last 3 lines as live captions; earlier lines cannot be scrolled back.</p>
           </div>
           <div>
             <h3>2. Things to try</h3>
@@ -232,9 +234,9 @@
         <h4>TechSure Support</h4>
         Help for your headphones, speakers, laptops, tablets and smart watches.
       </div>
-      <div><h4>Support</h4><a href="#">Claims &amp; Returns</a><a href="#faq">Help Centre</a><a href="#">Warranty</a></div>
-      <div><h4>Orders</h4><a href="#">Track an order</a><a href="#">Shipping</a><a href="#">Refunds</a></div>
-      <div><h4>Company</h4><a href="#">About</a><a href="#">Privacy</a><a href="#">Terms</a></div>
+      <div><h4>Claims &amp; Returns</h4><a href="#how">How it works</a><a href="#policy">Policy at a glance</a><a href="#faq">FAQ</a></div>
+      <div><h4>Call Sam</h4><span>Bottom-right call button</span><span>English &amp; Tiếng Việt</span></div>
+      <div><h4>Evaluators</h4><a href="#guide">Test guide</a><a href="https://cognigy-static-jp1.nicecxone.com" target="_blank" rel="noopener">xApp PIN page</a></div>
       <div class="legal">TechSure is a fictional company created for the Cognigy.AI Capstone project. No real orders, payments or personal data are processed on this page.</div>
     </div>
   </footer>
