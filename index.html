@@ -25,12 +25,8 @@
     .logo svg { width: 30px; height: 30px; }
     nav.main { display: flex; gap: 22px; font-size: 15px; }
     nav.main a { color: var(--ink); text-decoration: none; padding: 21px 0; border-bottom: 3px solid transparent; }
-    nav.main a.active { border-bottom-color: var(--blue); color: var(--blue); font-weight: 600; }
-    .spacer { flex: 1; }
-    .acct { font-size: 14px; color: var(--muted); }
 
     .crumbs { font-size: 13px; color: var(--muted); padding: 14px 0 0; }
-    .crumbs a { color: var(--muted); text-decoration: none; }
 
     /* Hero */
     .hero { display: grid; grid-template-columns: 1.35fr 1fr; gap: 34px; align-items: center; padding: 26px 0 38px; }
@@ -96,7 +92,7 @@
     @media (max-width: 860px) {
       .hero, .guide .cols { grid-template-columns: 1fr; }
       .steps, .cards { grid-template-columns: 1fr 1fr; }
-      nav.main, .acct { display: none; }
+      nav.main { display: none; }
       footer .wrap { grid-template-columns: 1fr 1fr; }
       .hero h1 { font-size: 30px; }
     }
@@ -122,8 +118,6 @@
         <a href="#faq">FAQ</a>
         <a href="#guide">Test guide</a>
       </nav>
-      <span class="spacer"></span>
-      <span class="acct">Claims &amp; Returns</span>
     </div>
   </header>
 
